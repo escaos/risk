@@ -16,7 +16,7 @@ export const API_SERVER_CONFIG: IApiConfig = {
   env: 'development',
   services: {
     tokens: {
-      getTokensUrl: 'http://localhost:3000/api/tokens',
+      getTokensUrl: 'https://www.matcha.xyz/tokenlists/137.json',
     },
     match: {
       getMatchUrl: 'http://localhost:3000/api/match',

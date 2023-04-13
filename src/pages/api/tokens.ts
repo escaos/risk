@@ -1,25 +1,30 @@
 import { TOKENS } from '@/shared/constants/TokenConstants';
 import { IApiResponse } from '@/shared/types/api';
-import { IToken } from '@/shared/types/tokens';
+import { ITokenGetResponse } from '@/shared/types/tokens';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-const getTokens = () => {
+const getTokens = async () => {
   return TOKENS;
 };
 
-export default function handler(
+export const tokensHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<IApiResponse | IToken[]>
-) {
+  res: NextApiResponse<IApiResponse | ITokenGetResponse>
+) => {
+  const { method } = req;
   try {
-    if (req.method === 'get') {
-      const response = getTokens();
+    if (method?.toLowerCase() === 'get') {
+      const response = await getTokens();
+
       return res.status(200).json(response);
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json([]);
+    const message = (err as Error)?.message ?? 'Unknown error.';
+    res.status(500).json({ result: null, error: { message } });
   }
 
-  res.status(500).json([]);
-}
+  res.status(500).json({ result: null, error: { message: 'Method unknown.' } });
+};
+
+export default tokensHandler;

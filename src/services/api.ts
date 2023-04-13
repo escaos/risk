@@ -1,6 +1,6 @@
 import { API_CLIENT_CONFIG, API_SERVER_CONFIG } from '@/shared/constants/apiConstants';
 import { IApiConfig, IApiHeaders, IApiResponse } from '@/shared/types/api';
-import { IToken } from '@/shared/types/tokens';
+import { IToken, ITokenGetResponse } from '@/shared/types/tokens';
 
 export default class API {
   public static init(config: IApiConfig) {
@@ -44,6 +44,8 @@ export default class API {
         ...(customConfig.headers ?? []),
       },
     };
+    console.log('🚀 ~ file: api.ts:47 ~ API ~ config:', config);
+    console.log('🚀 ~ file: api.ts:66 ~ API ~ url:', url);
 
     if (body) config.body = JSON.stringify(body);
 
@@ -60,7 +62,10 @@ export default class API {
           return Promise.reject(data);
         }
       })
-      .catch((err) => err);
+      .catch((err) => {
+        console.log('🚀 ~ file: api.ts:66 ~ API ~ err:', err);
+        return err;
+      });
   };
 
   public static get<TResponse>(
@@ -146,9 +151,10 @@ export default class API {
     console.log('🚀 ~ file: api.ts:87 ~ API ~ getServices ~ headers:', headers);
     return {
       tokens: {
-        getTokens: (): Promise<IApiResponse<IToken[]>> => {
+        getTokens: (): Promise<IApiResponse<ITokenGetResponse>> => {
           const { services } = config;
           const getTokens = services.tokens.getTokensUrl;
+          console.log('🚀 ~ file: api.ts:152 ~ API ~ getServices ~ getTokens:', getTokens);
           return API.get(getTokens);
         },
       },

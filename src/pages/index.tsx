@@ -1,21 +1,12 @@
+import { Layout } from '@/containers/Layout';
 import { useFetchTokens } from '@/services/tokens/useFetchTokens';
-import { Inter } from 'next/font/google';
-
-// eslint-disable-next-line new-cap
-const inter = Inter({ subsets: ['latin'] });
 
 const Home = () => {
   const result = useFetchTokens();
   console.log('🚀 ~ file: index.tsx:9 ~ Home ~ result:', result);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <header>
-        <h1 className={`${inter.className} text-4xl font-bold`}>Match</h1>
-        <>search</>
-        <>profileMenu</>
-      </header>
-
+    <Layout>
       <section className="flex flex-col items-center">
         <h2 className="text-2xl font-bold">Find your match</h2>
         <p className="text-center">
@@ -25,7 +16,7 @@ const Home = () => {
           turpis egestas. Nulla facilisi. Nulla facilisi. Nulla
         </p>
       </section>
-    </main>
+    </Layout>
   );
 };
 
