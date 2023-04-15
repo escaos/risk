@@ -44,8 +44,6 @@ export default class API {
         ...(customConfig.headers ?? []),
       },
     };
-    console.log('🚀 ~ file: api.ts:47 ~ API ~ config:', config);
-    console.log('🚀 ~ file: api.ts:66 ~ API ~ url:', url);
 
     if (body) config.body = JSON.stringify(body);
 
@@ -63,7 +61,6 @@ export default class API {
         }
       })
       .catch((err) => {
-        console.log('🚀 ~ file: api.ts:66 ~ API ~ err:', err);
         return err;
       });
   };
@@ -154,7 +151,6 @@ export default class API {
         getTokens: (): Promise<IApiResponse<ITokenGetResponse>> => {
           const { services } = config;
           const getTokens = services.tokens.getTokensUrl;
-          console.log('🚀 ~ file: api.ts:152 ~ API ~ getServices ~ getTokens:', getTokens);
           return API.get(getTokens);
         },
       },

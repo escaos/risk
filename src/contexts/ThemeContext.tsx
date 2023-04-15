@@ -53,12 +53,9 @@ const ContextProvider = ({ children }: ProviderProps): ReactElement => {
   useEffect(() => {
     const mountContext = () => {
       setLoading(true);
-      const themeCookie = getCookie('theme') as ITheme;
 
-      if (!themeCookie) saveTheme(THEME_LIGHT);
-      else {
-        setTheme(themeCookie);
-      }
+      const themeCookie = getCookie('theme') as ITheme;
+      saveTheme(themeCookie ?? THEME_LIGHT);
 
       setLoading(false);
     };

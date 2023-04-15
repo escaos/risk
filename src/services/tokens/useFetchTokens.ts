@@ -6,7 +6,6 @@ import API from '../api';
 const apiFetchTokens = async (): Promise<ITokenGetResponse> => {
   try {
     const res = await API.client.tokens.getTokens();
-    console.log('🚀 ~ file: useFetchTokens.ts:11 ~ apiFetchTokens ~ res:', res);
 
     const { result } = res;
 
@@ -19,7 +18,6 @@ const apiFetchTokens = async (): Promise<ITokenGetResponse> => {
 
 export const useFetchTokens = () => {
   const queryKeys = [QUERY_KEY.TOKENS];
-  console.log('🚀 ~ file: useFetchTokens.ts:23 ~ useFetchTokens ~ queryKeys:', queryKeys);
 
   const result = useQuery<ITokenGetResponse | undefined, Error>(queryKeys, () => apiFetchTokens());
 
